@@ -1,3 +1,4 @@
 black
 python-dotenv
 confluent-kafka
+pyyaml

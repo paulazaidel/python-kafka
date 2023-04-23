@@ -1,5 +1,6 @@
 import os
 
+import yaml
 from confluent_kafka.cimpl import Consumer
 from dotenv import load_dotenv
 
@@ -17,7 +18,10 @@ consumer = Consumer(
     }
 )
 
-consumer.subscribe(["python_kafka"])
+with open("kafka_topics.yaml") as file:
+    topics = yaml.load(file, Loader=yaml.FullLoader)
+
+consumer.subscribe(topics["topics"])
 
 while True:
     msg = consumer.poll(1.0)
